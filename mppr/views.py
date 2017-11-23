@@ -18,7 +18,8 @@ class IndexView(View):
 
     def post(self, request):
         print(request.body.decode('utf-8'))
-        print(json.loads(request.body.decode('utf-8')))
+        if json.loads(request.body.decode('utf-8')).get('data') is None:
+            return JsonResponse({'status':'bad'})
         print(json.loads(request.body.decode('utf-8')).get('data'))
         print('123214')
         data = json.loads(request.body.decode('utf-8')).get('data').split(',')[1]
