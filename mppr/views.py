@@ -11,17 +11,17 @@ from django.views.decorators.csrf import csrf_exempt
 from skimage import io
 from scipy.spatial import distance
 
-from mppr.utils import handle_uploaded_file
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class IndexView(View):
 
     def post(self, request):
-        try:
-            data = json.loads(request.body.decode('utf-8')).get('data').split(',')[1]
-        except:
-            return JsonResponse({'status':'bad'})
+        print(request.body.decode('utf-8'))
+        print(json.loads(request.body.decode('utf-8')))
+        print(json.loads(request.body.decode('utf-8')).get('data'))
+        print('123214')
+        data = json.loads(request.body.decode('utf-8')).get('data').split(',')[1]
         data_decoded = base64.b64decode(data)
         image_object = hashlib.sha256(data.encode())
         image_hash = image_object.hexdigest()
