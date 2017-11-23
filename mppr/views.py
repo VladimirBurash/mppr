@@ -60,6 +60,8 @@ class IndexView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class AddView(View):
     def post(self, request):
+        if json.loads(request.body.decode('utf-8')).get('data') is None:
+            return JsonResponse({'status':'bad'})
         data = json.loads(request.body.decode('utf-8')).get('data').split(',')[1]
         data_decoded = base64.b64decode(data)
         image_object = hashlib.sha256(data.encode())
