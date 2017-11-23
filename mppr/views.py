@@ -29,8 +29,8 @@ class IndexView(View):
 
         with open('templates/{}.jpg'.format(image_hash), 'wb') as f:
             f.write(data_decoded)
-        sp = dlib.shape_predictor('/home/vladimir/models/shape_predictor_68_face_landmarks.dat')
-        facerec = dlib.face_recognition_model_v1('/home/vladimir/models/dlib_face_recognition_resnet_model_v1.dat')
+        sp = dlib.shape_predictor('/opt/models/shape_predictor_68_face_landmarks.dat')
+        facerec = dlib.face_recognition_model_v1('/opt/models/dlib_face_recognition_resnet_model_v1.dat')
         detector = dlib.get_frontal_face_detector()
 
         img = io.imread('templates/users/{}.jpg'.format(cookie))
