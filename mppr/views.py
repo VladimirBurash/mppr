@@ -18,7 +18,10 @@ from mppr.utils import handle_uploaded_file
 class IndexView(View):
 
     def post(self, request):
-        data = json.loads(request.body.decode('utf-8')).get('data').split(',')[1]
+        try:
+            data = json.loads(request.body.decode('utf-8')).get('data').split(',')[1]
+        except:
+            return JsonResponse({'status':'bad'})
         data_decoded = base64.b64decode(data)
         image_object = hashlib.sha256(data.encode())
         image_hash = image_object.hexdigest()
